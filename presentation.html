@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-,::before,*::after{box-sizing:border-box}
+*,*::before,*::after{box-sizing:border-box}
 :root{
   --char:#0b0705;
   --cream:#f4e8d2;
@@ -223,7 +223,7 @@ main{position:relative;z-index:2}
   padding:14vh calc(var(--edge) + var(--rail-gap)) 14vh var(--edge);
 }
 .stack{max-width:min(100%,46rem);width:100%}
-.stack>+{margin-top:1.1em}
+.stack>*+*{margin-top:1.1em}
 .stack h1,.stack h2{margin:0}
 .js .stop .stack{
   opacity:0;transform:translateY(24px);filter:blur(6px);
@@ -278,6 +278,29 @@ h2 em{font-style:italic;color:var(--accent)}
 }
 .stack li:first-child{margin-top:0}
 .stack li::marker{color:var(--accent)}
+.concept-visual{
+  width:min(100%,400px);
+  margin:1.15em 0 .9em;
+  padding:.45em 0 .55em;
+  border-block:1px solid var(--line);
+  color:var(--accent);
+}
+.concept-visual svg{
+  display:block;
+  width:100%;
+  height:auto;
+}
+.concept-visual figcaption{
+  margin-top:.35em;
+  color:var(--muted);
+  font-size:.68rem;
+  letter-spacing:.08em;
+}
+.concept-visual .shape{fill:currentColor;fill-opacity:.14;stroke:currentColor;stroke-width:1.5}
+.concept-visual .line{fill:none;stroke:currentColor;stroke-width:1.5}
+.concept-visual .soft{fill:none;stroke:currentColor;stroke-width:1;stroke-opacity:.4}
+.concept-visual .label{fill:var(--cream);font:10px "IBM Plex Sans",sans-serif}
+.concept-visual .note{fill:var(--muted);font:9px "IBM Plex Sans",sans-serif}
 .demo{
   display:block;position:relative;
   width:100%;max-width:var(--w,44ch);
@@ -475,6 +498,24 @@ h2 em{font-style:italic;color:var(--accent)}
       <h2>A universe in motion.</h2>
       <p>The Big Bang is the leading scientific theory for the origin of the observable universe. It says that everything we can see — galaxies, stars, planets, and even living beings — began from a much hotter and denser early state.</p>
       <p>Space expanded from that early state. As it expanded, it cooled. That cooling allowed particles to form, atoms to appear, stars to shine, galaxies to assemble, and eventually planets and life to exist.</p>
+      <figure class="concept-visual">
+        <svg viewBox="0 0 400 86" role="img" aria-label="A tiny hot universe expands and develops into stars and galaxies">
+          <circle class="shape" cx="48" cy="38" r="7"/>
+          <path class="line" d="M68 38h54m-8-6 8 6-8 6"/>
+          <circle class="shape" cx="158" cy="38" r="17"/>
+          <path class="line" d="M183 38h48m-8-6 8 6-8 6"/>
+          <circle class="soft" cx="287" cy="38" r="29"/>
+          <circle class="shape" cx="287" cy="38" r="4"/>
+          <circle class="shape" cx="270" cy="24" r="2"/>
+          <circle class="shape" cx="304" cy="27" r="2"/>
+          <circle class="shape" cx="272" cy="53" r="2"/>
+          <circle class="shape" cx="303" cy="53" r="2"/>
+          <text class="note" x="31" y="80">hot + dense</text>
+          <text class="note" x="136" y="80">expansion</text>
+          <text class="note" x="261" y="80">stars + galaxies</text>
+        </svg>
+        <figcaption>From a hot beginning to the structures we see today.</figcaption>
+      </figure>
       <p class="small">Important phrase: expanding and cooling. The temperature readout at the top left changes as you move through time.</p>
     </div>
   </section>
@@ -510,6 +551,17 @@ h2 em{font-style:italic;color:var(--accent)}
       <h2>Expansion makes things cooler.</h2>
       <p>As space expands, radiation stretches to longer wavelengths. Longer wavelengths mean lower energy, so the universe cools. Matter also spreads out, becoming less dense.</p>
       <p>This simple idea explains why the early universe was a hot plasma, why it later became transparent, and why we can still detect a faint microwave glow today.</p>
+      <figure class="concept-visual">
+        <svg viewBox="0 0 400 86" role="img" aria-label="A short light wave stretches into a longer wave as space expands">
+          <path class="line" d="M24 37 Q34 12 44 37 T64 37 T84 37 T104 37 T124 37 T144 37 T164 37"/>
+          <path class="soft" d="M181 37h37m-7-6 7 6-7 6"/>
+          <path class="line" d="M235 37 Q255 12 275 37 T315 37 T355 37 T395 37"/>
+          <text class="note" x="72" y="72">short wavelength · higher energy</text>
+          <text class="note" x="241" y="72">longer wavelength · cooler</text>
+          <text class="label" x="186" y="18">space expands</text>
+        </svg>
+        <figcaption>As space grows, light stretches and loses energy.</figcaption>
+      </figure>
       <ul>
         <li>Smaller universe = hotter, denser.</li>
         <li>Larger universe = cooler, thinner.</li>
@@ -525,6 +577,20 @@ h2 em{font-style:italic;color:var(--accent)}
       <h2>Rapid expansion</h2>
       <p>A very brief period of extremely rapid expansion is called inflation. In a tiny fraction of a second, the universe grew enormously, smoothing out large-scale differences.</p>
       <p>Inflation also amplified microscopic quantum fluctuations. Those tiny variations became the seeds of galaxies and clusters.</p>
+      <figure class="concept-visual">
+        <svg viewBox="0 0 400 86" role="img" aria-label="A tiny patch of space rapidly inflates into a much larger region">
+          <rect class="soft" x="22" y="15" width="78" height="55" rx="4"/>
+          <circle class="shape" cx="48" cy="34" r="2"/><circle class="shape" cx="72" cy="51" r="2"/>
+          <path class="line" d="M124 42h70m-9-7 9 7-9 7"/>
+          <rect class="soft" x="222" y="9" width="154" height="67" rx="5"/>
+          <circle class="shape" cx="250" cy="27" r="2"/><circle class="shape" cx="282" cy="53" r="2"/>
+          <circle class="shape" cx="317" cy="25" r="2"/><circle class="shape" cx="350" cy="56" r="2"/>
+          <text class="note" x="36" y="82">tiny patch</text>
+          <text class="label" x="145" y="25">inflation</text>
+          <text class="note" x="260" y="82">vast, smoother space</text>
+        </svg>
+        <figcaption>Inflation stretched a tiny region into an enormous one.</figcaption>
+      </figure>
       <p class="small">Without inflation, it would be difficult to explain why the universe looks so similar in different directions.</p>
     </div>
   </section>
@@ -536,6 +602,19 @@ h2 em{font-style:italic;color:var(--accent)}
       <h2>A hot particle soup</h2>
       <p>The early universe was filled with extremely energetic particles: quarks, gluons, electrons, photons and other particles constantly created and destroyed.</p>
       <p>It was too hot for protons and neutrons to settle into simple matter for a while. As expansion continued, the temperature fell and particles could combine.</p>
+      <figure class="concept-visual">
+        <svg viewBox="0 0 400 86" role="img" aria-label="A hot mix of quarks, electrons and photons before they combine into matter">
+          <circle class="shape" cx="64" cy="27" r="13"/><text class="label" x="57" y="31">q</text>
+          <circle class="shape" cx="116" cy="53" r="13"/><text class="label" x="109" y="57">e−</text>
+          <circle class="shape" cx="173" cy="25" r="13"/><text class="label" x="166" y="29">γ</text>
+          <circle class="shape" cx="230" cy="54" r="13"/><text class="label" x="223" y="58">q</text>
+          <circle class="shape" cx="286" cy="27" r="13"/><text class="label" x="279" y="31">γ</text>
+          <circle class="shape" cx="340" cy="53" r="13"/><text class="label" x="333" y="57">e−</text>
+          <path class="soft" d="M45 72h307"/>
+          <text class="note" x="132" y="83">energetic particles in a hot plasma</text>
+        </svg>
+        <figcaption>Quarks (q), electrons (e−) and light (γ) filled the hot early universe.</figcaption>
+      </figure>
       <p class="small">This stage helps explain why matter as we know it could only form after the universe cooled sufficiently.</p>
     </div>
   </section>
@@ -547,6 +626,20 @@ h2 em{font-style:italic;color:var(--accent)}
       <h2>First nuclei</h2>
       <p>It cooled enough for protons and neutrons to join and form the first nuclei: hydrogen and helium, with traces of lithium.</p>
       <p>This period is called Big Bang nucleosynthesis. The predicted amounts of these light elements are one of the strong pieces of evidence for the Big Bang model.</p>
+      <figure class="concept-visual">
+        <svg viewBox="0 0 400 86" role="img" aria-label="Protons and neutrons combine into hydrogen and helium nuclei">
+          <circle class="shape" cx="75" cy="34" r="11"/><text class="label" x="71" y="38">p+</text>
+          <circle class="shape" cx="117" cy="34" r="11"/><text class="label" x="113" y="38">n</text>
+          <path class="line" d="M145 34h47m-8-6 8 6-8 6"/>
+          <circle class="shape" cx="244" cy="26" r="11"/><text class="label" x="240" y="30">p+</text>
+          <circle class="shape" cx="266" cy="45" r="11"/><text class="label" x="262" y="49">n</text>
+          <circle class="shape" cx="222" cy="45" r="11"/><text class="label" x="218" y="49">p+</text>
+          <circle class="shape" cx="244" cy="64" r="11"/><text class="label" x="240" y="68">n</text>
+          <text class="note" x="68" y="78">proton + neutron</text>
+          <text class="note" x="294" y="43">light nuclei</text>
+        </svg>
+        <figcaption>Protons and neutrons joined to make the first atomic nuclei.</figcaption>
+      </figure>
       <ul>
         <li>Mostly hydrogen.</li>
         <li>A large amount of helium.</li>
@@ -562,6 +655,21 @@ h2 em{font-style:italic;color:var(--accent)}
       <h2>Light finally travels freely</h2>
       <p>Electrons joined nuclei to make neutral atoms, mostly hydrogen and helium. Before this, light kept scattering off free electrons, like fog.</p>
       <p>Once atoms formed, the universe became transparent. The light released then is still observable today as the cosmic microwave background, cooled to microwave wavelengths.</p>
+      <figure class="concept-visual">
+        <svg viewBox="0 0 400 86" role="img" aria-label="Light scatters through a cloudy plasma, then travels freely after atoms form">
+          <path class="soft" d="M24 43h102"/>
+          <circle class="shape" cx="48" cy="28" r="4"/><circle class="shape" cx="77" cy="55" r="4"/>
+          <circle class="shape" cx="103" cy="29" r="4"/>
+          <path class="line" d="M25 43l27-13-12 26 31-26-12 26 38-26-13 26 39-13"/>
+          <path class="soft" d="M175 43h90m-8-6 8 6-8 6"/>
+          <circle class="shape" cx="318" cy="43" r="18"/>
+          <circle class="soft" cx="318" cy="43" r="29"/>
+          <path class="line" d="M347 43h36"/>
+          <text class="note" x="30" y="82">hot fog: light scatters</text>
+          <text class="note" x="287" y="82">atoms form: light escapes</text>
+        </svg>
+        <figcaption>When atoms formed, the universe became transparent to light.</figcaption>
+      </figure>
       <p class="small">This is one of the most important moments in cosmic history: the universe became see-through.</p>
     </div>
   </section>
@@ -573,6 +681,19 @@ h2 em{font-style:italic;color:var(--accent)}
       <h2>The universe turns dark</h2>
       <p>There were no stars yet. The universe was filled with neutral gas, and the only light was the fading afterglow of the hot early state.</p>
       <p>Gravity quietly began pulling denser regions together. Tiny differences from the early universe started growing into larger structures.</p>
+      <figure class="concept-visual">
+        <svg viewBox="0 0 400 86" role="img" aria-label="Neutral gas slowly gathers into denser regions under gravity before the first stars">
+          <circle class="soft" cx="198" cy="41" r="34"/>
+          <path class="soft" d="M150 12l27 20m44-20-20 20m-58 36 32-18m69 18-31-18"/>
+          <circle class="shape" cx="164" cy="31" r="3"/><circle class="shape" cx="228" cy="29" r="3"/>
+          <circle class="shape" cx="177" cy="52" r="3"/><circle class="shape" cx="215" cy="49" r="3"/>
+          <circle class="shape" cx="198" cy="40" r="5"/>
+          <text class="note" x="19" y="44">neutral gas</text>
+          <path class="line" d="M88 41h36m-8-6 8 6-8 6"/>
+          <text class="note" x="269" y="44">gravity gathers matter</text>
+        </svg>
+        <figcaption>Small differences in the gas slowly grew under gravity.</figcaption>
+      </figure>
       <p class="small">This period is often called the cosmic dark ages, because no luminous stars had yet formed.</p>
     </div>
   </section>
@@ -584,6 +705,21 @@ h2 em{font-style:italic;color:var(--accent)}
       <h2>First stars</h2>
       <p>Gravity pulled gas together until cores became hot and dense enough for nuclear fusion. The first stars switched on.</p>
       <p>These stars were probably massive and short-lived. They created heavier elements and released them when they died, preparing the universe for planets and life.</p>
+      <figure class="concept-visual">
+        <svg viewBox="0 0 400 86" role="img" aria-label="A cloud of gas collapses under gravity and ignites as a star through fusion">
+          <circle class="soft" cx="72" cy="40" r="26"/><circle class="soft" cx="93" cy="34" r="19"/>
+          <circle class="shape" cx="56" cy="35" r="3"/><circle class="shape" cx="88" cy="51" r="3"/>
+          <circle class="shape" cx="99" cy="24" r="3"/>
+          <path class="line" d="M128 42h63m-8-6 8 6-8 6"/>
+          <circle class="soft" cx="267" cy="41" r="31"/>
+          <circle class="shape" cx="267" cy="41" r="17"/>
+          <path class="line" d="M267 5v10m0 52v10m-36-36h10m52 0h10m-61-25 7 8m36 36 7 8m0-52-7 8m-36 36-7 8"/>
+          <text class="note" x="36" y="81">gas cloud</text>
+          <text class="label" x="243" y="45">fusion</text>
+          <text class="note" x="311" y="45">first star</text>
+        </svg>
+        <figcaption>Gravity compresses gas until fusion lights the first stars.</figcaption>
+      </figure>
       <ul>
         <li>Fusion begins.</li>
         <li>Light returns to the universe.</li>
@@ -599,6 +735,18 @@ h2 em{font-style:italic;color:var(--accent)}
       <h2>First galaxies</h2>
       <p>Stars gathered into galaxies. Gravity bound stars, gas, dust and dark matter into large systems.</p>
       <p>Over time, galaxies merged and evolved. The Milky Way is one product of this long process of cosmic structure formation.</p>
+      <figure class="concept-visual">
+        <svg viewBox="0 0 400 86" role="img" aria-label="Stars trace the curved spiral arms of a galaxy around a bright centre">
+          <path class="soft" d="M200 43c-10-31-72-28-86-4-12 21 21 34 42 18 19-14 9-35-12-38"/>
+          <path class="soft" d="M201 43c11 31 72 28 86 4 12-21-21-34-42-18-19 14-9 35 12 38"/>
+          <path class="line" d="M194 43c-7-19-42-18-49-3-6 11 10 19 22 10m39-7c7 19 42 18 49 3 6-11-10-19-22-10"/>
+          <circle class="shape" cx="200" cy="43" r="7"/>
+          <circle class="shape" cx="143" cy="25" r="2"/><circle class="shape" cx="268" cy="58" r="2"/>
+          <circle class="shape" cx="121" cy="48" r="2"/><circle class="shape" cx="284" cy="35" r="2"/>
+          <text class="note" x="169" y="82">stars orbit within a galaxy</text>
+        </svg>
+        <figcaption>Gravity gathers stars, gas and dark matter into galaxies.</figcaption>
+      </figure>
       <p class="small">Galaxies are not just collections of stars. They also contain gas, dust, dark matter, and black holes at their centres.</p>
     </div>
   </section>
@@ -610,6 +758,22 @@ h2 em{font-style:italic;color:var(--accent)}
       <h2>Our Solar System</h2>
       <p>The Sun and planets formed from a cloud of gas and dust already enriched by earlier stars.</p>
       <p>Earth formed around the same time. The atoms in our bodies — carbon, oxygen, nitrogen, iron — were forged in stars or produced in the early universe.</p>
+      <figure class="concept-visual">
+        <svg viewBox="0 0 400 86" role="img" aria-label="Planets orbit the Sun, with Earth shown as one of the planets">
+          <ellipse class="soft" cx="200" cy="43" rx="118" ry="30"/>
+          <ellipse class="soft" cx="200" cy="43" rx="76" ry="19"/>
+          <circle class="shape" cx="200" cy="43" r="13"/>
+          <circle class="shape" cx="82" cy="43" r="4"/>
+          <circle class="shape" cx="276" cy="43" r="5"/>
+          <circle class="shape" cx="312" cy="43" r="3"/>
+          <circle class="shape" cx="276" cy="43" r="2"/>
+          <path class="line" d="M270 31l6 12-6 12"/>
+          <text class="label" x="184" y="72">Sun</text>
+          <text class="label" x="263" y="20">Earth</text>
+          <text class="note" x="140" y="12">planets orbit a star</text>
+        </svg>
+        <figcaption>Our Solar System formed from gas enriched by earlier stars.</figcaption>
+      </figure>
       <p class="small">This is why scientists often say: we are made of star-stuff.</p>
     </div>
   </section>
@@ -621,6 +785,20 @@ h2 em{font-style:italic;color:var(--accent)}
       <h2>Today</h2>
       <p>Today we see a universe full of galaxies, stars, planets and life. It is still expanding, and observations show the expansion is accelerating due to dark energy.</p>
       <p>We look back across cosmic time: the farther we see, the older the light, and therefore the earlier the universe we observe.</p>
+      <figure class="concept-visual">
+        <svg viewBox="0 0 400 86" role="img" aria-label="Light from distant galaxies travels toward us and shows the universe at earlier times">
+          <circle class="shape" cx="354" cy="43" r="7"/>
+          <path class="soft" d="M348 43H52m7-6-7 6 7 6"/>
+          <circle class="shape" cx="90" cy="43" r="5"/>
+          <circle class="shape" cx="175" cy="43" r="4"/>
+          <circle class="shape" cx="258" cy="43" r="3"/>
+          <path class="line" d="M100 32h239m-8-6 8 6-8 6M185 50h154m-8-6 8 6-8 6M266 24h73m-8-6 8 6-8 6"/>
+          <text class="note" x="48" y="75">older light</text>
+          <text class="note" x="318" y="75">us, today</text>
+          <text class="label" x="133" y="14">farther away = farther back in time</text>
+        </svg>
+        <figcaption>Looking farther across space means seeing older light.</figcaption>
+      </figure>
       <ul>
         <li>The universe is still expanding.</li>
         <li>It is still cooling.</li>
@@ -895,14 +1073,15 @@ h2 em{font-style:italic;color:var(--accent)}
   var cv  = document.getElementById('sky');
   var ctx = cv.getContext('2d');
   var W = 0, H = 0, dpr = 1, tops = [];
-  var N = window.innerWidth < 720 ? 120 : 260;
+  var N = window.innerWidth < 720 ? 150 : 320;
   var pts = [];
   for (var i = 0; i < N; i++){
     pts.push({
       a: Math.random() * Math.PI * 2,
       r: Math.sqrt(Math.random()),
-      s: 0.5 + Math.random() * 1.6,
-      w: Math.random()
+      s: 0.35 + Math.random() * 1.55,
+      w: Math.random(),
+      flare: Math.random() > 0.965
     });
   }
   function measure(){
@@ -925,31 +1104,76 @@ h2 em{font-style:italic;color:var(--accent)}
     var heat = Math.max(0, 1 - p * 1.3);
     var cold = 1 - heat;
     ctx.clearRect(0, 0, W, H);
-    var gr = Math.max(W, H) * (0.04 + Math.pow(p, 0.65) * 1.1);
-    var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, gr);
-    g.addColorStop(0, 'rgba(255,' + Math.round(216 + heat * 38) + ',' + Math.round(170 + heat * 66) +
-                     ',' + (0.10 + 0.50 * heat * heat).toFixed(3) + ')');
-    g.addColorStop(0.42, 'rgba(' + Math.round(225 + heat * 30) + ',' + Math.round(130 + heat * 60) +
-                          ',' + Math.round(58 + heat * 40) + ',' + (0.05 + 0.14 * heat).toFixed(3) + ')');
-    g.addColorStop(1, 'rgba(225,140,60,0)');
-    ctx.fillStyle = g;
+    var gr = Math.max(W, H) * (0.035 + Math.pow(p, 0.65) * 0.92);
+    var core = ctx.createRadialGradient(cx, cy, 0, cx, cy, gr * 0.46);
+    core.addColorStop(0, 'rgba(255,252,236,' + (0.16 + 0.5 * heat * heat).toFixed(3) + ')');
+    core.addColorStop(0.16, 'rgba(255,' + Math.round(220 + heat * 35) + ',' +
+      Math.round(175 + heat * 70) + ',' + (0.12 + 0.35 * heat).toFixed(3) + ')');
+    core.addColorStop(0.58, 'rgba(255,' + Math.round(145 + heat * 75) + ',' +
+      Math.round(80 + heat * 65) + ',' + (0.035 + 0.16 * heat).toFixed(3) + ')');
+    core.addColorStop(1, 'rgba(225,140,60,0)');
+    ctx.fillStyle = core;
     ctx.fillRect(0, 0, W, H);
+
+    var haze = ctx.createRadialGradient(cx, cy, gr * 0.12, cx, cy, gr);
+    haze.addColorStop(0, 'rgba(255,205,145,' + (0.035 + 0.07 * heat).toFixed(3) + ')');
+    haze.addColorStop(0.34, 'rgba(' + Math.round(225 + heat * 26) + ',' +
+      Math.round(125 + heat * 45) + ',' + Math.round(85 + heat * 65) + ',' +
+      (0.045 + 0.1 * heat).toFixed(3) + ')');
+    haze.addColorStop(0.72, 'rgba(120,105,160,' + (0.018 + 0.035 * cold).toFixed(3) + ')');
+    haze.addColorStop(1, 'rgba(70,90,150,0)');
+    ctx.fillStyle = haze;
+    ctx.fillRect(0, 0, W, H);
+
     var cr = Math.round(255 - cold * 55);
     var cg = Math.round(246 - cold * 96);
     var cb = Math.round(226 - cold * 126);
     var baseA = 0.9 * heat + 0.3 * cold;
+    ctx.globalCompositeOperation = 'screen';
+    if (p > 0.035){
+      ctx.lineWidth = 0.65;
+      for (var i = 0; i < N; i++){
+        var ray = pts[i];
+        if (!ray.flare) continue;
+        var rayD = ray.r * maxR * spread;
+        var rayX = cx + Math.cos(ray.a) * rayD;
+        var rayY = cy + Math.sin(ray.a) * rayD;
+        ctx.strokeStyle = 'rgba(' + cr + ',' + cg + ',' + cb + ',' +
+          (0.018 + 0.045 * ray.w).toFixed(3) + ')';
+        ctx.beginPath();
+        ctx.moveTo(cx + Math.cos(ray.a) * rayD * 0.58, cy + Math.sin(ray.a) * rayD * 0.58);
+        ctx.lineTo(rayX, rayY);
+        ctx.stroke();
+      }
+    }
     for (var i = 0; i < N; i++){
       var pt = pts[i];
       var d  = pt.r * maxR * spread;
       var px = cx + Math.cos(pt.a) * d;
       var py = cy + Math.sin(pt.a) * d;
       if (px < -20 || px > W + 20 || py < -20 || py > H + 20) continue;
-      ctx.fillStyle = 'rgba(' + cr + ',' + cg + ',' + cb + ',' +
-                      (baseA * (0.45 + 0.55 * pt.w)).toFixed(3) + ')';
+      var radius = pt.s * (0.7 + p * 0.45);
+      var alpha = baseA * (0.32 + 0.68 * pt.w);
+      if (pt.flare && radius > 1.15){
+        var glow = ctx.createRadialGradient(px, py, 0, px, py, radius * 5);
+        glow.addColorStop(0, 'rgba(' + cr + ',' + cg + ',' + cb + ',' + (alpha * 0.34).toFixed(3) + ')');
+        glow.addColorStop(1, 'rgba(' + cr + ',' + cg + ',' + cb + ',0)');
+        ctx.fillStyle = glow;
+        ctx.beginPath();
+        ctx.arc(px, py, radius * 5, 0, 6.2832);
+        ctx.fill();
+      }
+      ctx.fillStyle = 'rgba(' + cr + ',' + cg + ',' + cb + ',' + alpha.toFixed(3) + ')';
       ctx.beginPath();
-      ctx.arc(px, py, pt.s * (0.75 + p * 0.5), 0, 6.2832);
+      ctx.arc(px, py, radius, 0, 6.2832);
       ctx.fill();
+      if (pt.flare && radius > 1.35){
+        ctx.fillStyle = 'rgba(' + cr + ',' + cg + ',' + cb + ',' + (alpha * 0.28).toFixed(3) + ')';
+        ctx.fillRect(px - radius * 2.5, py - 0.3, radius * 5, 0.6);
+        ctx.fillRect(px - 0.3, py - radius * 2.5, 0.6, radius * 5);
+      }
     }
+    ctx.globalCompositeOperation = 'source-over';
   }
   var SUP = {'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
   function sup(s){ return String(s).replace(/[-0-9]/g, function(c){ return SUP[c]; }); }
@@ -1027,6 +1251,53 @@ h2 em{font-style:italic;color:var(--accent)}
     i = Math.max(0, Math.min(last, i));
     stops[i].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   }
+  var gestureLocked = false, gestureTimer = null, wheelDelta = 0, wheelTimer = null;
+  function isGestureControl(target){
+    return target instanceof Element &&
+      (target.closest('button, summary, a, input, textarea, select, [contenteditable], .speech-panel') !== null);
+  }
+  function advanceFromGesture(direction){
+    if (gestureLocked) return;
+    gestureLocked = true;
+    goTo(current + direction);
+    window.clearTimeout(gestureTimer);
+    gestureTimer = window.setTimeout(function(){ gestureLocked = false; }, 950);
+  }
+  window.addEventListener('wheel', function(e){
+    if (isGestureControl(e.target) || Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+    wheelDelta += e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? window.innerHeight : 1);
+    window.clearTimeout(wheelTimer);
+    wheelTimer = window.setTimeout(function(){ wheelDelta = 0; }, 140);
+    if (Math.abs(wheelDelta) < 24) return;
+    e.preventDefault();
+    advanceFromGesture(wheelDelta > 0 ? 1 : -1);
+    wheelDelta = 0;
+  }, { passive: false });
+  var touchStartY = 0, touchStartX = 0, touchTarget = null, touchMoved = false;
+  window.addEventListener('touchstart', function(e){
+    if (e.touches.length !== 1) { touchTarget = null; return; }
+    touchTarget = e.target;
+    touchStartY = e.touches[0].clientY;
+    touchStartX = e.touches[0].clientX;
+    touchMoved = false;
+  }, { passive: true });
+  window.addEventListener('touchmove', function(e){
+    if (!touchTarget || isGestureControl(touchTarget) || e.touches.length !== 1) return;
+    var dy = touchStartY - e.touches[0].clientY;
+    var dx = touchStartX - e.touches[0].clientX;
+    if (Math.abs(dy) > 24 && Math.abs(dy) > Math.abs(dx)){
+      e.preventDefault();
+      touchMoved = true;
+    }
+  }, { passive: false });
+  window.addEventListener('touchend', function(e){
+    if (!touchTarget || isGestureControl(touchTarget) || e.changedTouches.length !== 1) return;
+    var dy = touchStartY - e.changedTouches[0].clientY;
+    var dx = touchStartX - e.changedTouches[0].clientX;
+    if (touchMoved && Math.abs(dy) > Math.abs(dx)) advanceFromGesture(dy > 0 ? 1 : -1);
+    touchTarget = null;
+    touchMoved = false;
+  }, { passive: true });
   document.getElementById('next').addEventListener('click', function(){ goTo(current + 1); });
   document.getElementById('back').addEventListener('click', function(){ goTo(current - 1); });
   window.addEventListener('keydown', function(e){
