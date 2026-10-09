@@ -220,7 +220,7 @@ main{position:relative;z-index:2}
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding:14vh calc(var(--edge) + var(--rail-gap)) 14vh var(--edge);
+  padding:clamp(4rem,9vh,7rem) calc(var(--edge) + var(--rail-gap));
 }
 .stack{max-width:min(100%,46rem);width:100%}
 .stack>*+*{margin-top:1.1em}
@@ -446,6 +446,15 @@ h2 em{font-style:italic;color:var(--accent)}
     right:12px;
     bottom:calc(12px + env(safe-area-inset-bottom,0px));
   }
+}
+@media (max-height:700px){
+  .stop{
+    justify-content:flex-start;
+    padding-top:8rem;
+    padding-bottom:7rem;
+  }
+  .stack>h1+p{margin-top:1.4em}
+  .stack>p.hint{margin-top:2em}
 }
 </style>
 </head>
@@ -1251,38 +1260,47 @@ h2 em{font-style:italic;color:var(--accent)}
     i = Math.max(0, Math.min(last, i));
     stops[i].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   }
+  document.getElementById('next').addEventListener('click', function(){ goTo(current + 1); });
+  document.getElementById('back').addEventListener('click', function(){ goTo(current - 1); });
   var gestureLocked = false, gestureTimer = null, wheelDelta = 0, wheelTimer = null;
   function isGestureControl(target){
     return target instanceof Element &&
-      (target.closest('button, summary, a, input, textarea, select, [contenteditable], .speech-panel') !== null);
+      target.closest('button, summary, a, input, textarea, select, [contenteditable], .speech-panel') !== null;
+  }
+  function canAdvanceByGesture(){
+    return stops[current].scrollHeight <= window.innerHeight + 1;
   }
   function advanceFromGesture(direction){
-    if (gestureLocked) return;
+    if (gestureLocked || !canAdvanceByGesture()) return;
     gestureLocked = true;
     goTo(current + direction);
     window.clearTimeout(gestureTimer);
     gestureTimer = window.setTimeout(function(){ gestureLocked = false; }, 950);
   }
   window.addEventListener('wheel', function(e){
-    if (isGestureControl(e.target) || Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+    if (isGestureControl(e.target) || Math.abs(e.deltaY) <= Math.abs(e.deltaX) ||
+        !canAdvanceByGesture()) return;
     wheelDelta += e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? window.innerHeight : 1);
     window.clearTimeout(wheelTimer);
     wheelTimer = window.setTimeout(function(){ wheelDelta = 0; }, 140);
     if (Math.abs(wheelDelta) < 24) return;
     e.preventDefault();
-    advanceFromGesture(wheelDelta > 0 ? 1 : -1);
+    if (!gestureLocked) advanceFromGesture(wheelDelta > 0 ? 1 : -1);
     wheelDelta = 0;
   }, { passive: false });
   var touchStartY = 0, touchStartX = 0, touchTarget = null, touchMoved = false;
   window.addEventListener('touchstart', function(e){
-    if (e.touches.length !== 1) { touchTarget = null; return; }
+    if (e.touches.length !== 1 || isGestureControl(e.target) || !canAdvanceByGesture()){
+      touchTarget = null;
+      return;
+    }
     touchTarget = e.target;
     touchStartY = e.touches[0].clientY;
     touchStartX = e.touches[0].clientX;
     touchMoved = false;
   }, { passive: true });
   window.addEventListener('touchmove', function(e){
-    if (!touchTarget || isGestureControl(touchTarget) || e.touches.length !== 1) return;
+    if (!touchTarget || e.touches.length !== 1) return;
     var dy = touchStartY - e.touches[0].clientY;
     var dx = touchStartX - e.touches[0].clientX;
     if (Math.abs(dy) > 24 && Math.abs(dy) > Math.abs(dx)){
@@ -1291,15 +1309,13 @@ h2 em{font-style:italic;color:var(--accent)}
     }
   }, { passive: false });
   window.addEventListener('touchend', function(e){
-    if (!touchTarget || isGestureControl(touchTarget) || e.changedTouches.length !== 1) return;
+    if (!touchTarget || e.changedTouches.length !== 1) return;
     var dy = touchStartY - e.changedTouches[0].clientY;
     var dx = touchStartX - e.changedTouches[0].clientX;
     if (touchMoved && Math.abs(dy) > Math.abs(dx)) advanceFromGesture(dy > 0 ? 1 : -1);
     touchTarget = null;
     touchMoved = false;
   }, { passive: true });
-  document.getElementById('next').addEventListener('click', function(){ goTo(current + 1); });
-  document.getElementById('back').addEventListener('click', function(){ goTo(current - 1); });
   window.addEventListener('keydown', function(e){
     var t = e.target;
     var onWidget = t instanceof Element && t.closest('button, summary, a, details, input, textarea, [contenteditable]');
@@ -1310,6 +1326,15 @@ h2 em{font-style:italic;color:var(--accent)}
       return;
     }
     if (onWidget && (k === ' ' || k === 'Enter')) return;
+    var direction = (k === 'ArrowDown' || k === 'ArrowRight' || k === 'PageDown' ||
+      (k === ' ' && !e.shiftKey)) ? 1 :
+      (k === 'ArrowUp' || k === 'ArrowLeft' || k === 'PageUp' ||
+      (k === ' ' && e.shiftKey)) ? -1 : 0;
+    if (direction && (k === 'ArrowDown' || k === 'ArrowUp' || k === ' ')){
+      var activeStop = stops[current].getBoundingClientRect();
+      if ((direction > 0 && activeStop.bottom > window.innerHeight + 8) ||
+          (direction < 0 && activeStop.top < -8)) return;
+    }
     if (k === 'ArrowDown' || k === 'ArrowRight' || k === 'PageDown' || (k === ' ' && !e.shiftKey)){
       e.preventDefault(); goTo(current + 1);
     } else if (k === 'ArrowUp' || k === 'ArrowLeft' || k === 'PageUp' || (k === ' ' && e.shiftKey)){
@@ -1329,6 +1354,13 @@ h2 em{font-style:italic;color:var(--accent)}
     var k2 = b > a ? Math.min(1, Math.max(0, (y - a) / (b - a))) : 0;
     return Math.min(last, i + k2);
   }
+  function stopAtCenter(){
+    var y = window.scrollY + window.innerHeight * 0.5;
+    for (var i = 0; i < stops.length; i++){
+      if (tops[i] <= y && (i === last || tops[i + 1] > y)) return i;
+    }
+    return y < tops[0] ? 0 : last;
+  }
   var cur = 0, raf = null;
   function frame(){
     raf = null;
@@ -1342,7 +1374,7 @@ h2 em{font-style:italic;color:var(--accent)}
     render(cur);
     updateReadout(target);
     updatePalette(target);
-    current = Math.round(target);
+    current = stopAtCenter();
     setActive(current);
     if (cur !== p) raf = window.requestAnimationFrame(frame);
   }
@@ -1350,6 +1382,9 @@ h2 em{font-style:italic;color:var(--accent)}
   window.addEventListener('scroll', kick, { passive: true });
   window.addEventListener('resize', function(){ resize(); kick(); });
   window.addEventListener('orientationchange', function(){ resize(); kick(); });
+  document.addEventListener('toggle', function(e){
+    if (e.target instanceof HTMLDetailsElement){ measure(); kick(); }
+  }, true);
   if ('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
